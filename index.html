@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Task Manager</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0b1220;
+            color: #fff;
+        }
+
+        header {
+            background: #111c3a;
+            padding: 15px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #4da6ff;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .card {
+            background: #111c3a;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        h2 {
+            color: #4da6ff;
+        }
+
+        input, button, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 8px;
+            border: none;
+        }
+
+        button {
+            background: #4da6ff;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #3399ff;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: #1a2b4c;
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    Smart Task Manager with AI & Geolocation
+</header>
+
+<div class="container">
+
+    <!-- Task Management -->
+    <div class="card">
+        <h2>📋 Task Management</h2>
+        <input type="text" id="taskInput" placeholder="Enter your task">
+        <button onclick="addTask()">Add Task</button>
+
+        <ul id="taskList"></ul>
+    </div>
+
+    <!-- Geolocation -->
+    <div class="card">
+        <h2>📍 Geolocation</h2>
+        <button onclick="getLocation()">Get Current Location</button>
+        <p id="locationOutput">Location will appear here</p>
+    </div>
+
+    <!-- AI Assistant -->
+    <div class="card">
+        <h2>🤖 AI Assistant</h2>
+        <textarea id="aiInput" placeholder="Ask something..."></textarea>
+        <button onclick="aiResponse()">Ask AI</button>
+        <p id="aiOutput">AI response will appear here</p>
+    </div>
+
+</div>
+
+<script>
+    // Task Management
+    function addTask() {
+        let taskInput = document.getElementById("taskInput");
+        let taskList = document.getElementById("taskList");
+
+        if (taskInput.value === "") return;
+
+        let li = document.createElement("li");
+        li.textContent = taskInput.value;
+        taskList.appendChild(li);
+
+        taskInput.value = "";
+    }
+
+    // Geolocation
+    function getLocation() {
+        let output = document.getElementById("locationOutput");
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                output.innerHTML = 
+                    "Latitude: " + position.coords.latitude + 
+                    "<br>Longitude: " + position.coords.longitude;
+            });
+        } else {
+            output.innerHTML = "Geolocation not supported.";
+        }
+    }
+
+    // AI Simulation (connect backend later)
+    function aiResponse() {
+        let input = document.getElementById("aiInput").value;
+        let output = document.getElementById("aiOutput");
+
+        // Dummy AI response
+        output.innerHTML = "AI Suggestion: Try completing your tasks on time!";
+    }
+</script>
+
+</body>
+</html>
